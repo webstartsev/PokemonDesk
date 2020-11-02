@@ -6,7 +6,16 @@
 }
 
 .content {
-  width: 1125px;
+  max-width: 1145px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
   margin: 0 auto;
   flex-grow: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+  }
 }

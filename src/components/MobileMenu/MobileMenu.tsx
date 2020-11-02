@@ -1,8 +1,8 @@
 import React from 'react';
 
-import s from './Menu.module.scss';
+import s from './MobileMenu.module.scss';
 
-const Menu = () => {
+const MobileMenu = () => {
   return (
     <nav className={s.wrap}>
       <ul className={s.list}>
@@ -27,13 +27,8 @@ const Menu = () => {
           </a>
         </li>
       </ul>
-      <div className={s.toggle}>
-        <span />
-        <span />
-        <span />
-      </div>
     </nav>
   );
 };
 
-export default Menu;
+export default MobileMenu;

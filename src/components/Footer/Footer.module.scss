@@ -1,5 +1,8 @@
 .container {
-  width: 1125px;
+  max-width: 1145px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
   margin: 0 auto;
   flex-shrink: 0;
 }
@@ -20,4 +23,27 @@
 
 .link {
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .make {
+    font-weight: normal;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .wrap {
+    flex-direction: column-reverse;
+    margin-bottom: 16px;
+  }
+  .link {
+    margin-bottom: 5px;
+  }
 }
