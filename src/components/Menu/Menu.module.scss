@@ -1,0 +1,28 @@
+.wrap {
+  width: 657px;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+}
+
+.item {
+  padding-bottom: 15px;
+  border-bottom: 3px solid transparent;
+  &:hover {
+    border-color: #212121;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: #000000;
+  font-size: 25px;
+}

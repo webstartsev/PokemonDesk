@@ -1,0 +1,23 @@
+.container {
+  width: 1125px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 33px;
+}
+
+.make,
+.link {
+  color: #000000;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.link {
+  text-decoration: none;
+}
