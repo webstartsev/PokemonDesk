@@ -1,4 +1,4 @@
-.wrap {
+.root {
   width: 657px;
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .wrap {
+  .root {
     width: 100%;
   }
 
@@ -46,7 +46,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .wrap {
+  .root {
     justify-content: flex-end;
   }
 

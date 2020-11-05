@@ -1,4 +1,4 @@
-.wrap {
+.root {
   position: absolute;
   top: 56px;
   left: 0;
@@ -11,6 +11,7 @@
   transition: transform 0.3s ease;
   z-index: 5;
   padding-top: 20px;
+  display: none;
 }
 
 .list {
@@ -38,4 +39,10 @@
   text-decoration: none;
   color: #000000;
   font-size: 19px;
+}
+
+@media screen and (max-width: 375px) {
+  .root {
+    display: block;
+  }
 }

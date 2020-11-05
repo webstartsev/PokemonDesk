@@ -1,8 +1,7 @@
-.container {
+.root {
   max-width: 1145px;
   width: 100%;
   padding: 0 20px;
-  box-sizing: border-box;
   margin: 0 auto;
   flex-shrink: 0;
 }
@@ -26,10 +25,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .container {
+  .root {
     padding: 0 20px;
     width: 100%;
-    box-sizing: border-box;
   }
 
   .make {
