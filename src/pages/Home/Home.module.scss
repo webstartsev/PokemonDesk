@@ -7,10 +7,30 @@
   flex-direction: column;
 }
 
-.content {
+.contentWrap {
   max-width: 1145px;
   width: 100%;
-  margin: 0 auto;
+  margin: 120px auto 90px;
   padding: 0 20px;
   flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentTitle {
+  font-weight: normal;
+  font-size: 72px;
+  line-height: 84px;
+  letter-spacing: 4px;
+}
+
+.contentText {
+  font-family: 'Karla';
+  font-size: 32px;
+  line-height: 37px;
+  width: 550px;
+}
+
+.contentParallax {
+  position: relative;
 }
