@@ -1,15 +1,17 @@
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
-import "./custom.css";
-import s from "./App.modules.scss";
+import s from './App.module.scss';
 
 const App: React.FunctionComponent = (): React.ReactElement => {
-    return (
-        <div className={cn(s.header, "color")}>
-            This is App component!
-        </div>
-    );
+  return (
+    <div className={s.container}>
+      <Header />
+      <div className={s.content}>This is App component!</div>
+      <Footer />
+    </div>
+  );
 };
 
 export default App;

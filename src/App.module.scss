@@ -1,0 +1,21 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f5db13 0%, #f2b807 100%);
+}
+
+.content {
+  max-width: 1145px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+  }
+}
