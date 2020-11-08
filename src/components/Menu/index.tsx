@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import s from './Menu.module.scss';
 
@@ -17,7 +18,7 @@ export const MENU: IMenu[] = [
   {
     id: 2,
     value: 'Pokédex',
-    link: '/',
+    link: '/pokedex',
   },
   {
     id: 3,
@@ -37,9 +38,9 @@ const Menu = () => {
       <ul className={s.list}>
         {MENU.map(({ id, value, link }) => (
           <li className={s.item} key={id}>
-            <a className={s.link} href={link}>
+            <Link className={s.link} to={link}>
               {value}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

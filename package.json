@@ -17,6 +17,7 @@
     "@types/react-dom": "^16.9.9",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
+    "@types/react-router-dom": "^5.1.6",
     "css-loader": "^5.0.0",
     "css-modules-typescript-loader": "^4.0.1",
     "eslint": "^7.12.1",
@@ -49,7 +50,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
   },
   "husky": {
     "hooks": {
