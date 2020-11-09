@@ -5,7 +5,7 @@
   background: $green;
   box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
   border-radius: 11px;
-  height: 66px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@
 
   font-family: 'Karla';
   font-weight: bold;
-  font-size: 23px;
+
   line-height: 27px;
 
   &:active {
@@ -24,7 +24,11 @@
   }
 }
 
-.color_yellow {
+.yellow {
+  background: $third;
+}
+
+.green {
   background: $third;
 }
 
@@ -32,7 +36,17 @@
   width: 100%;
 }
 
-.size_small {
+.small {
   height: 40px;
   font-size: 17px;
+}
+
+.medium {
+  height: 66px;
+  font-size: 23px;
+}
+
+.large {
+  height: 80px;
+  font-size: 26px;
 }

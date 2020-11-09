@@ -3,15 +3,26 @@ import cn from 'classnames';
 
 import s from './Button.module.scss';
 
+type ButtonColor = 'green' | 'yellow';
+type ButtonSize = 'small' | 'medium' | 'large';
+
 interface ButtonProps {
   onClick: (evt: React.MouseEvent<HTMLButtonElement>) => void;
-  isYellow?: boolean;
+  color?: ButtonColor;
   isFullSize?: boolean;
-  size?: 'small';
+  size?: ButtonSize;
+  className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, isYellow, isFullSize, size }) => {
-  const classes = cn(s.root, { [s.color_yellow]: isYellow }, { [s.width_full]: isFullSize }, { [s.size_small]: size });
+const Button: React.FC<ButtonProps> = ({
+  children,
+  onClick,
+  color = 'green',
+  className,
+  isFullSize,
+  size = 'medium',
+}) => {
+  const classes = cn(s.root, className, s[color], s[size], { [s.width_full]: isFullSize });
 
   return (
     <button type="button" className={classes} onClick={onClick}>
