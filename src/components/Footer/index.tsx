@@ -4,7 +4,7 @@ import s from './Footer.module.scss';
 
 const Footer = () => {
   return (
-    <footer className={s.container}>
+    <footer className={s.root}>
       <div className={s.wrap}>
         <span className={s.make}>
           Make with{' '}

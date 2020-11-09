@@ -1,16 +1,19 @@
-.logo {
-  display: block;
+.root {
+  display: inline-block;
+}
+svg {
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-  .logo {
+  .root {
     width: 121px;
     margin-right: 60px;
   }
 }
 
 @media screen and (max-width: 375px) {
-  .logo {
+  .root {
     width: 58px;
     margin-right: 60px;
   }
