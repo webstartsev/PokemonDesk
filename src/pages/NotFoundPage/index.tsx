@@ -16,7 +16,9 @@ const NotFoundPage = () => {
           <div className={s.subTitle}>
             <span>The rocket team</span> has won this time.
           </div>
-          <Button onClick={() => navigate('/')}>Return</Button>
+          <Button color="yellow" onClick={() => navigate('/')}>
+            Return
+          </Button>
         </div>
       </div>
     </div>

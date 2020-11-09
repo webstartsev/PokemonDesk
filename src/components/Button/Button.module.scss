@@ -12,9 +12,7 @@
   padding: 0 36px 9px;
   cursor: pointer;
 
-  font-family: 'Karla';
   font-weight: bold;
-
   line-height: 27px;
 
   &:active {
@@ -29,7 +27,7 @@
 }
 
 .green {
-  background: $third;
+  background: $green;
 }
 
 .width_full {
