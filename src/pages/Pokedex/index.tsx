@@ -20,17 +20,16 @@ const PokedexPage = () => {
         </Heading>
 
         <div className={s.pokemonList}>
-          {POKEMONS.map((pokemon) => {
-            return (
-              <Pokemon
-                name={pokemon.name}
-                attack={pokemon.stats.attack}
-                defense={pokemon.stats.defense}
-                types={pokemon.types}
-                img={pokemon.img}
-              />
-            );
-          })}
+          {POKEMONS.map((pokemon) => (
+            <Pokemon
+              key={pokemon.id}
+              name={pokemon.name}
+              attack={pokemon.stats.attack}
+              defense={pokemon.stats.defense}
+              types={pokemon.types}
+              img={pokemon.img}
+            />
+          ))}
         </div>
       </Layout>
       <Footer />
