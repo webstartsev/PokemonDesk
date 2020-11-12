@@ -39,26 +39,38 @@ interface IPokemonsResponse {
   pokemons: IPokemon[];
 }
 
-const PokedexPage = () => {
-  const [total, setTotal] = useState(0);
-  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+const usePokemons = () => {
+  const [data, setData] = useState<IPokemonsResponse>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    fetch(`http://zar.hosthot.ru/api/v1/pokemons?limit=${POKEMON_PER_PAGE}`)
-      .then((res) => res.json())
-      .then((data: IPokemonsResponse) => {
-        setTotal(data.total);
-        setPokemons(data.pokemons);
-      })
-      .catch(() => {
+    const getPokemons = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`http://zar.hosthot.ru/api/v1/pokemons?limit=${POKEMON_PER_PAGE}`);
+        const result = await response.json();
+
+        setData(result);
+      } catch (e) {
         setIsError(true);
-      })
-      .finally(() => {
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+
+    getPokemons();
   }, []);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
+};
+
+const PokedexPage = () => {
+  const { data, isLoading, isError } = usePokemons();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -72,11 +84,11 @@ const PokedexPage = () => {
     <div className={s.root}>
       <Layout className={s.contentWrap}>
         <Heading tag="h1" className={s.contentTitle}>
-          {total} <b>Pokemons</b> for you to choose your favorite
+          {data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
 
         <div className={s.pokemonList}>
-          {pokemons.map((pokemon) => (
+          {data.pokemons.map((pokemon) => (
             <Pokemon
               key={pokemon.id}
               name={pokemon.name}
