@@ -1,46 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { A, usePath } from 'hookrouter';
+import cn from 'classnames';
 
 import s from './Menu.module.scss';
-
-interface IMenu {
-  id: number;
-  value: string;
-  link: string;
-}
-
-export const MENU: IMenu[] = [
-  {
-    id: 1,
-    value: 'Home',
-    link: '/',
-  },
-  {
-    id: 2,
-    value: 'Pokédex',
-    link: '/pokedex',
-  },
-  {
-    id: 3,
-    value: 'Legendaries',
-    link: '/',
-  },
-  {
-    id: 4,
-    value: 'Documentation',
-    link: '/',
-  },
-];
+import { GENERAL_MENU } from '../../routes';
 
 const Menu = () => {
+  const path = usePath();
+
   return (
     <nav className={s.root}>
       <ul className={s.list}>
-        {MENU.map(({ id, value, link }) => (
-          <li className={s.item} key={id}>
-            <Link className={s.link} to={link}>
-              {value}
-            </Link>
+        {GENERAL_MENU.map(({ title, link }) => (
+          <li className={cn(s.item, { [s.activeItem]: link === path })} key={title}>
+            <A className={s.link} href={link}>
+              {title}
+            </A>
           </li>
         ))}
       </ul>
