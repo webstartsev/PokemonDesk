@@ -5,10 +5,11 @@ import s from './Layout.module.scss';
 
 interface LayoutProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, className = null }) => (
   <div className={cn(s.root, className)}>{children}</div>
 );
 
-export default Layout;
+export default React.memo(Layout);
