@@ -39,8 +39,13 @@ interface IPokemonsResponse {
   pokemons: IPokemon[];
 }
 
+interface IData {
+  pokemons: IPokemon[];
+  total: number;
+}
+
 const usePokemons = () => {
-  const [data, setData] = useState<IPokemonsResponse>([]);
+  const [data, setData] = useState<IData>({ pokemons: [], total: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -49,9 +54,9 @@ const usePokemons = () => {
       setIsLoading(true);
       try {
         const response = await fetch(`http://zar.hosthot.ru/api/v1/pokemons?limit=${POKEMON_PER_PAGE}`);
-        const result = await response.json();
+        const result: IPokemonsResponse = await response.json();
 
-        setData(result);
+        setData({ pokemons: result.pokemons, total: result.total });
       } catch (e) {
         setIsError(true);
       } finally {
