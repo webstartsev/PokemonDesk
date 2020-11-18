@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useData from '../../hooks/getData';
+import { Endpoint, QueryParams } from '../../utils/getUrlWithParamsConfig';
 
 import Layout from '../../components/Layout';
 import Heading from '../../components/Heading';
@@ -39,47 +41,25 @@ interface IPokemonsResponse {
   pokemons: IPokemon[];
 }
 
-interface IData {
-  pokemons: IPokemon[];
-  total: number;
+interface IDataResponse {
+  data: IPokemonsResponse | null;
+  isLoading: boolean;
+  isError: boolean;
 }
 
-const usePokemons = () => {
-  const [data, setData] = useState<IData>({ pokemons: [], total: 0 });
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`http://zar.hosthot.ru/api/v1/pokemons?limit=${POKEMON_PER_PAGE}`);
-        const result: IPokemonsResponse = await response.json();
-
-        setData({ pokemons: result.pokemons, total: result.total });
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
-
 const PokedexPage = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState<QueryParams>({ limit: POKEMON_PER_PAGE });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { data, isError }: IDataResponse = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [searchValue]);
+
+  const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((prev) => ({
+      ...prev,
+      name: e.target.value,
+    }));
+  };
 
   if (isError) {
     return <div>Error :(</div>;
@@ -89,11 +69,21 @@ const PokedexPage = () => {
     <div className={s.root}>
       <Layout className={s.contentWrap}>
         <Heading tag="h1" className={s.contentTitle}>
-          {data.total} <b>Pokemons</b> for you to choose your favorite
+          {data?.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
 
+        <div className={s.contentSearch}>
+          <input
+            type="text"
+            className={s.search}
+            value={searchValue}
+            onChange={changeSearchHandler}
+            placeholder="Encuentra tu pokémon..."
+          />
+        </div>
+
         <div className={s.pokemonList}>
-          {data.pokemons.map((pokemon) => (
+          {data?.pokemons.map((pokemon) => (
             <Pokemon
               key={pokemon.id}
               name={pokemon.name}
