@@ -6,6 +6,7 @@ import { Endpoint, QueryParams } from '../../utils/getUrlWithParamsConfig';
 import Layout from '../../components/Layout';
 import Heading from '../../components/Heading';
 import Pokemon, { PokemonType } from '../../components/Pokemon';
+import Loader from '../../components/Loader';
 
 import s from './Pokedex.module.scss';
 
@@ -51,7 +52,9 @@ const PokedexPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<QueryParams>({ limit: POKEMON_PER_PAGE });
 
-  const { data, isError }: IDataResponse = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [searchValue]);
+  const { data, isLoading, isError }: IDataResponse = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [
+    searchValue,
+  ]);
 
   const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -81,19 +84,22 @@ const PokedexPage = () => {
             placeholder="Encuentra tu pokémon..."
           />
         </div>
-
-        <div className={s.pokemonList}>
-          {data?.pokemons.map((pokemon) => (
-            <Pokemon
-              key={pokemon.id}
-              name={pokemon.name}
-              attack={pokemon.stats.attack}
-              defense={pokemon.stats.defense}
-              types={pokemon.types}
-              img={pokemon.img}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={s.pokemonList}>
+            {data?.pokemons.map((pokemon) => (
+              <Pokemon
+                key={pokemon.id}
+                name={pokemon.name}
+                attack={pokemon.stats.attack}
+                defense={pokemon.stats.defense}
+                types={pokemon.types}
+                img={pokemon.img}
+              />
+            ))}
+          </div>
+        )}
       </Layout>
     </div>
   );
