@@ -12,6 +12,7 @@ interface ButtonProps {
   isFullSize?: boolean;
   size?: ButtonSize;
   className?: string;
+  children?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -31,4 +32,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export default Button;
+export default React.memo(Button);
