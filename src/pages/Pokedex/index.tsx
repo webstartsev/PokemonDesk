@@ -1,9 +1,12 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useData from '../../hooks/getData';
+import { Endpoint, QueryParams } from '../../utils/getUrlWithParamsConfig';
 
 import Layout from '../../components/Layout';
 import Heading from '../../components/Heading';
 import Pokemon, { PokemonType } from '../../components/Pokemon';
+import Loader from '../../components/Loader';
 
 import s from './Pokedex.module.scss';
 
@@ -39,42 +42,27 @@ interface IPokemonsResponse {
   pokemons: IPokemon[];
 }
 
-const usePokemons = () => {
-  const [data, setData] = useState<IPokemonsResponse>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`http://zar.hosthot.ru/api/v1/pokemons?limit=${POKEMON_PER_PAGE}`);
-        const result = await response.json();
-
-        setData(result);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
+interface IDataResponse {
+  data: IPokemonsResponse | null;
+  isLoading: boolean;
+  isError: boolean;
+}
 
 const PokedexPage = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState<QueryParams>({ limit: POKEMON_PER_PAGE });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { data, isLoading, isError }: IDataResponse = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [
+    searchValue,
+  ]);
+
+  const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((prev) => ({
+      ...prev,
+      name: e.target.value,
+    }));
+  };
 
   if (isError) {
     return <div>Error :(</div>;
@@ -84,21 +72,34 @@ const PokedexPage = () => {
     <div className={s.root}>
       <Layout className={s.contentWrap}>
         <Heading tag="h1" className={s.contentTitle}>
-          {data.total} <b>Pokemons</b> for you to choose your favorite
+          {data?.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
 
-        <div className={s.pokemonList}>
-          {data.pokemons.map((pokemon) => (
-            <Pokemon
-              key={pokemon.id}
-              name={pokemon.name}
-              attack={pokemon.stats.attack}
-              defense={pokemon.stats.defense}
-              types={pokemon.types}
-              img={pokemon.img}
-            />
-          ))}
+        <div className={s.contentSearch}>
+          <input
+            type="text"
+            className={s.search}
+            value={searchValue}
+            onChange={changeSearchHandler}
+            placeholder="Encuentra tu pokémon..."
+          />
         </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={s.pokemonList}>
+            {data?.pokemons.map((pokemon) => (
+              <Pokemon
+                key={pokemon.id}
+                name={pokemon.name}
+                attack={pokemon.stats.attack}
+                defense={pokemon.stats.defense}
+                types={pokemon.types}
+                img={pokemon.img}
+              />
+            ))}
+          </div>
+        )}
       </Layout>
     </div>
   );
