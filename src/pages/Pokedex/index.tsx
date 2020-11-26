@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useData from '../../hooks/getData';
+import useDebounce from '../../hooks/useDebounce';
 import { Endpoint, QueryParams } from '../../utils/getUrlWithParamsConfig';
 import { IPokemonsResponse } from '../../interface/pokemons';
 
@@ -15,8 +16,9 @@ const POKEMON_PER_PAGE = 12;
 const PokedexPage = () => {
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<QueryParams>({ limit: POKEMON_PER_PAGE });
+  const debounceValue = useDebounce(searchValue, 500);
 
-  const { data, isLoading, isError } = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [searchValue]);
+  const { data, isLoading, isError } = useData<IPokemonsResponse>(Endpoint.getPokemons, query, [debounceValue]);
 
   const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

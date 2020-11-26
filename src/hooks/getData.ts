@@ -20,7 +20,7 @@ const useData = <T>(endpoint: Endpoint, query: QueryParams, deps: any[] = []) =>
     };
 
     getData();
-  }, deps);
+  }, [...deps, endpoint, query]);
 
   return {
     data,
