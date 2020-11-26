@@ -5,7 +5,9 @@
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "env NODE_ENV=development webpack-dev-server"
+    "start": "env NODE_ENV=development webpack-dev-server",
+    "test": "npx jest --watch",
+    "linter": "eslint ./src"
   },
   "repository": "https://github.com/webstartsev/PokemonDesk.git",
   "author": "Sergey Startsev <sergey@webstartsev.ru>",
