@@ -15,4 +15,9 @@ describe('toCapitalizeFirstLetter', () => {
     const str = toCapitalizeFirstLetter('pIKaChU');
     expect(str).toEqual('Pikachu');
   });
+
+  test('Принимает на вход пустую строку и возвращает пустую строку', () => {
+    const str = toCapitalizeFirstLetter('');
+    expect(str).toEqual('');
+  });
 });
